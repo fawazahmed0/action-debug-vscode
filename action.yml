@@ -42,7 +42,7 @@ runs:
         urlpart=`node -e "process.arch == 'arm' ? console.log('linux-armhf') : console.log('alpine-'+process.arch)"`
         curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-$urlpart" --output code.tar.gz
         tar -xvzf code.tar.gz -C ../
-        rm -rf code.zip
+        rm -rf code.tar.gz
         chmod 777 ../code
         ../code serve-web --port 8391 --connection-token ${{ inputs.token }} 1> /dev/null 2>&1  &
         cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
