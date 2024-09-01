@@ -22,7 +22,7 @@ steps:
 - uses: fawazahmed0/action-debug-vscode@main
 ```
 
-The URL to access the terminal will be printed in Github Actions log.
+The URL to access the vs code will be printed in Github Actions log.
 
 ## Set Token
 
