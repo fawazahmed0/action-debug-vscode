@@ -1,0 +1,70 @@
+name: 'Debugging with vscode'
+description: 'Debug your GitHub Actions by Accessing via VS Code'
+branding:
+  icon: terminal
+  color: 'black'
+author: 'Fawaz Ahmed'
+
+# Define your inputs here.
+inputs:
+  token:
+    description: 'Set token to access the terminal. Default value is root'
+    required: false
+    default: 'root'
+
+# Define your inputs here.
+runs:
+  using: "composite"
+  steps:
+
+    - name: Install dependencies and run commands in windows
+      if: ${{ contains(runner.os, 'windows') }}
+      shell: bash
+      run: |
+        urlpart=`node -e "console.log(process.arch)"`
+        curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-win32-$urlpart" --output code.zip
+        7z x -y code.zip
+        mv code.exe ..
+        rm -rf code.zip
+        curl -f -L -o ../cloudflared.exe https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
+        ../code.exe serve-web --port 8391 --connection-token ${{ inputs.token }} &
+        ../cloudflared.exe tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+
+    - name: Install dependencies and run commands in linux
+      if: ${{ contains(runner.os, 'linux') }}
+      shell: bash
+      run: |
+        sudo apt-get update -y
+        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-`dpkg --print-architecture`.deb
+        sudo apt install -y ./cloudflared-linux-`dpkg --print-architecture`.deb
+        rm ./cloudflared-linux-`dpkg --print-architecture`.deb
+        
+        urlpart=`node -e "process.arch == 'arm' ? console.log('linux-armhf') : console.log('alpine-'+process.arch)"`
+        curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-$urlpart" --output code.tar.gz
+        tar -xvzf code.tar.gz -C ../
+        rm -rf code.zip
+        chmod 777 ../code
+        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} &
+        cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+
+    - name: Install dependencies and run commands in macOS
+      if: ${{ contains(runner.os, 'macos') }}
+      shell: bash
+      run: |
+        wget -O ../file.tgz https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-amd64.tgz
+        tar -xvzf ../file.tgz -C ../
+        chmod 777 ../cloudflared
+
+        urlpart=`node -e "console.log(process.arch)"`
+        curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-$urlpart" --output code.zip
+        7z x -y code.zip
+        mv code ..
+        rm -rf code.zip
+        chmod 777 ../code
+        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} &
+        ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+
+    - name: wait for continue file to exist
+      shell: bash
+      run: |
+        while [ ! -f ./continue ]; do sleep 5; echo `node -e "console.log(Array.from(process.argv[1].matchAll(/-{10,}.*?(?<url>https?:\/\/.*?)\s.*?-{10,}/sgi))?.[0]?.groups?.url)" "$(cat temp.txt)"`?tkn=root; done
