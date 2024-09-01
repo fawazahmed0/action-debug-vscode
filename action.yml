@@ -67,4 +67,4 @@ runs:
     - name: wait for continue file to exist
       shell: bash
       run: |
-        while [ ! -f ./continue ]; do sleep 5; echo `node -e "console.log(Array.from(process.argv[1].matchAll(/-{10,}.*?(?<url>https?:\/\/.*?)\s.*?-{10,}/sgi))?.[0]?.groups?.url)" "$(cat ../mylog.txt)"`?tkn=root&folder=`node -e "data=process.cwd().replaceAll(path.sep, '/'); process.platform == 'win32' ? console.log('/'+data) : console.log(data)"`; done
+        while [ ! -f ./continue ]; do sleep 5; echo `node -e "console.log(Array.from(process.argv[1].matchAll(/-{10,}.*?(?<url>https?:\/\/.*?)\s.*?-{10,}/sgi))?.[0]?.groups?.url)" "$(cat ../mylog.txt)"`?tkn=root\&folder=`node -e "data=process.cwd().replaceAll(path.sep, '/'); process.platform == 'win32' ? console.log('/'+data) : console.log(data)"`; done
