@@ -1,6 +1,6 @@
 # action-debug-vscode
-Remote Access your GitHub Actions via Browser Based Terminal.
-Built using [ttyd](https://github.com/tsl0922/ttyd) and [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/)
+Remote Access your GitHub Actions via Browser VS Code.
+Built using [vscode server](https://code.visualstudio.com/docs/remote/vscode-server) and [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/)
 
 ## Features
 
@@ -19,25 +19,20 @@ Built using [ttyd](https://github.com/tsl0922/ttyd) and [Cloudflare tunnel](http
 
 ```yaml
 steps:
-- uses: fawazahmed0/action-debug@main
+- uses: fawazahmed0/action-debug-vscode@main
 ```
 
 The URL to access the terminal will be printed in Github Actions log.
 
-The default credentials are:
-| User:     | Password: |
-|-----------|-------|
-| admin | admin |
+## Set Token
 
-## Set Credentials
-
-Set credentials in "user:password" format
+Set token
 
 ```yaml
 steps:
-- uses: fawazahmed0/action-debug@main
+- uses: fawazahmed0/action-debug-vscode@main
   with:
-      credentials: "user:password"
+      token: "token"
 ```
 
 
