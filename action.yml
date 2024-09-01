@@ -27,7 +27,7 @@ runs:
         mv code.exe ..
         rm -rf code.zip
         curl -f -L -o ../cloudflared.exe https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
-        ../code.exe serve-web --port 8391 --connection-token ${{ inputs.token }} 2>&1 &
+        ../code.exe serve-web --port 8391 --connection-token ${{ inputs.token }} 1> /dev/null 2>&1 &
         ../cloudflared.exe tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
     - name: Install dependencies and run commands in linux
@@ -44,7 +44,7 @@ runs:
         tar -xvzf code.tar.gz -C ../
         rm -rf code.zip
         chmod 777 ../code
-        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} 2>&1  &
+        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} 1> /dev/null 2>&1  &
         cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
     - name: Install dependencies and run commands in macOS
@@ -61,7 +61,7 @@ runs:
         mv code ..
         rm -rf code.zip
         chmod 777 ../code
-        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} 2>&1  &
+        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} 1> /dev/null 2>&1  &
         ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
     - name: wait for continue file to exist
