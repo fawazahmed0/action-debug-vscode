@@ -1,5 +1,5 @@
 # action-debug-vscode
-Remote Access your GitHub Actions via VS Code.
+Remote Access your GitHub Actions via Browser based VS Code.
 Built using [vscode server](https://code.visualstudio.com/docs/remote/vscode-server) and [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/)
 
 ## Features
