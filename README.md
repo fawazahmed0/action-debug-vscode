@@ -38,7 +38,7 @@ steps:
 
 ## Continue a workflow
 
-If you want to continue a workflow, just create an empty file with the name `continue` in the project directory by running `touch continue`.
+If you want to continue a workflow, just create an empty file with the name `continue` in the project directory.
 
 ## Thanks to
 
