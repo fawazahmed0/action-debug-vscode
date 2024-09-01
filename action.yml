@@ -1,5 +1,5 @@
 name: 'Debugging with vscode'
-description: 'Debug your GitHub Actions by Accessing via VS Code'
+description: 'Debug your GitHub Actions by Accessing via Browser based VS Code'
 branding:
   icon: terminal
   color: 'black'
@@ -8,7 +8,7 @@ author: 'Fawaz Ahmed'
 # Define your inputs here.
 inputs:
   token:
-    description: 'Set token to access the terminal. Default value is root'
+    description: 'Set token to access the VS Code. Default value is root'
     required: false
     default: 'root'
 
