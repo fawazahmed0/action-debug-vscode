@@ -44,7 +44,7 @@ runs:
         tar -xvzf code.tar.gz -C ../
         rm -rf code.zip
         chmod 777 ../code
-        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} --server-base-path . 1> /dev/null 2>&1  &
+        ../code serve-web --port 8391 --connection-token ${{ inputs.token }} --server-base-path . &
         cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
     - name: Install dependencies and run commands in macOS
