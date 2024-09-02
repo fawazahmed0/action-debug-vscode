@@ -8,6 +8,10 @@ Built using [vscode server](https://code.visualstudio.com/docs/remote/vscode-ser
 - Continue your Workflows afterwards
 
 
+https://github.com/user-attachments/assets/5021351d-2a9a-46b5-9fec-1d36a1eed84e
+
+
+
 ## Supported Operating Systems
 
 - Linux
