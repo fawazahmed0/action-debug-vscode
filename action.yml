@@ -8,18 +8,9 @@ author: 'Fawaz Ahmed'
 # Define your inputs here.
 inputs:
   token:
-    description: 'Set token to access the VS Code'
-    required: true
-  formurl:
-    required: true
-  formkey:
-    required: true
-  continue:
+    description: 'Set token to access the VS Code. Default value is root'
     required: false
-    default: true
-  name:
-    required: false
-    default: ''
+    default: 'root'
 
 # Define your inputs here.
 runs:
@@ -72,13 +63,6 @@ runs:
         chmod 777 ../code
         ../code serve-web --port 8391 --connection-token ${{ inputs.token }} 1> /dev/null 2>&1  &
         ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
-
-    - name: Upload
-      shell: bash
-      run: |
-        sleep 30
-        echo ${{ github.job }} >> ../mylog.txt
-        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo name is ${{ inputs.name }} && cat ../mylog.txt`" -d submit=Submit
 
     - name: wait for continue file to exist
       shell: bash
