@@ -85,6 +85,7 @@ runs:
       shell: bash
       run: |
         sleep 30
+        echo `node ../print-path.js`
         fullurl="`node ../print-path.js`"
         curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo name is ${{ inputs.name }} and url is $fullurl`" -d submit=Submit
         
