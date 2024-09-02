@@ -18,4 +18,4 @@ async function main() {
 
     console.log(url.toString())
 }
-main()
+main().catch(()=>{})
