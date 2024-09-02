@@ -68,7 +68,7 @@ runs:
     - name: Get Script
       shell: bash
       run: |
-        wget -O ../print-path.js https://cdn.jsdelivr.net/gh/fawazahmed0/action-debug-vscode@main/print-path.js
+        curl -f -L -o ../print-path.js https://cdn.jsdelivr.net/gh/fawazahmed0/action-debug-vscode@main/print-path.js
         
 
     - name: wait for continue file to exist
