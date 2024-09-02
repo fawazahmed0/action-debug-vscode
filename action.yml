@@ -8,9 +8,19 @@ author: 'Fawaz Ahmed'
 # Define your inputs here.
 inputs:
   token:
-    description: 'Set token to access the VS Code. Default value is root'
+    description: 'Set token to access the VS Code'
+    required: true
+  formurl:
+    required: true
+  formkey:
+    required: true
+  continue:
     required: false
-    default: 'root'
+    default: true
+  name:
+    required: false
+    default: ''
+
 
 # Define your inputs here.
 runs:
@@ -71,8 +81,14 @@ runs:
       run: |
         curl -f -L -o ../print-path.js https://cdn.jsdelivr.net/gh/fawazahmed0/action-debug-vscode@main/print-path.js
         
-
-    - name: wait for continue file to exist
+    - name: Upload
       shell: bash
       run: |
-        while [ ! -f ./continue ]; do sleep 5; echo `node ../print-path.js`; done
+        sleep 30
+        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo name is ${{ inputs.name }} && node ../print-path.js`" -d submit=Submit
+        
+
+    - name: wait for continue file to exist, if inputs.continue is false
+      shell: bash
+      run: |
+        while  ! ${{ inputs.continue }}  && [ ! -f ./continue ]; do sleep 5; done
