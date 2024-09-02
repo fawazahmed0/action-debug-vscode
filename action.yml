@@ -85,7 +85,8 @@ runs:
       shell: bash
       run: |
         sleep 30
-        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo name is ${{ inputs.name }} && node ../print-path.js`" -d submit=Submit
+        fullurl="`node ../print-path.js`"
+        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo name is ${{ inputs.name }} and url is $fullurl`" -d submit=Submit
         
 
     - name: wait for continue file to exist, if inputs.continue is false
