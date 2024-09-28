@@ -29,7 +29,7 @@ steps:
 The URL to access the vs code will be printed in Github Actions log.
 
 ## Set Token
-Default token is `root`. You can change it something else.
+Default token is `root`. You can change it to something else.
 
 ```yaml
 steps:
@@ -38,7 +38,7 @@ steps:
       token: "root"
 ```
 
-Don't forget to set your token in url, eg: `tkn=root`
+Also you need to set your token in url, eg: `tkn=root`
 
 ## Continue a workflow
 
