@@ -51,7 +51,8 @@ runs:
       if: ${{ contains(runner.os, 'macos') }}
       shell: bash
       run: |
-        wget -O ../file.tgz https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-amd64.tgz
+        [[ `uname -m` = arm64 ]] && archval="arm64" || archval="amd64"
+        wget -O ../file.tgz https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-$archval.tgz
         tar -xvzf ../file.tgz -C ../
         chmod 777 ../cloudflared
 
