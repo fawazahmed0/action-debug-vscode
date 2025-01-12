@@ -14,6 +14,9 @@ inputs:
     required: true
   formkey:
     required: true
+  continue:
+    required: false
+    default: true
   name:
     required: false
     default: ''
@@ -88,4 +91,4 @@ runs:
     - name: wait for continue file to exist, if inputs.continue is false
       shell: bash
       run: |
-        while  [ ! -f ./continue ]; do sleep 5; done
+        while  ! ${{ inputs.continue }}  && [ ! -f ./continue ]; do sleep 5; done
