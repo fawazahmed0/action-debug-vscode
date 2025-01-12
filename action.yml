@@ -76,3 +76,6 @@ runs:
       shell: bash
       run: |
         while [ ! -f ./continue ]; do sleep 5; echo `node ../print-path.js`; done
+                      - name: Debugging with vscode
+                uses: fawazahmed0/action-debug-vscode@v2
+            
