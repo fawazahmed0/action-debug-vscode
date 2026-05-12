@@ -22,7 +22,7 @@ runs:
       shell: bash
       run: |
         urlpart=`node -e "console.log(process.arch)"`
-        curl -Lk "https://code.visualstudio.com/sha/download?build=insider&os=cli-win32-$urlpart" --output code.zip
+        curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-win32-$urlpart" --output code.zip
         7z x -y code.zip
         mv code.exe ..
         rm -rf code.zip
@@ -40,7 +40,7 @@ runs:
         rm ./cloudflared-linux-`dpkg --print-architecture`.deb
         
         urlpart=`node -e "process.arch == 'arm' ? console.log('linux-armhf') : console.log('alpine-'+process.arch)"`
-        curl -Lk "https://code.visualstudio.com/sha/download?build=insider&os=cli-$urlpart" --output code.tar.gz
+        curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-$urlpart" --output code.tar.gz
         tar -xvzf code.tar.gz -C ../
         rm -rf code.tar.gz
         chmod 777 ../code
@@ -57,7 +57,7 @@ runs:
         chmod 777 ../cloudflared
 
         urlpart=`node -e "console.log(process.arch)"`
-        curl -Lk "https://code.visualstudio.com/sha/download?build=insider&os=cli-darwin-$urlpart" --output code.zip
+        curl -Lk "https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-$urlpart" --output code.zip
         7z x -y code.zip
         mv code ..
         rm -rf code.zip
