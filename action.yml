@@ -22,7 +22,7 @@ runs:
       shell: bash
       run: |
         urlpart=`node -e "console.log(process.arch)"`
-        curl -Lk "https://update.code.visualstudio.com/1.118.1/cli-win32-$urlpart/insider" --output code.zip
+        curl -Lk "https://update.code.visualstudio.com/1.118.1/cli-win32-$urlpart/stable" --output code.zip
         7z x -y code.zip
         mv code.exe ..
         rm -rf code.zip
@@ -40,7 +40,7 @@ runs:
         rm ./cloudflared-linux-`dpkg --print-architecture`.deb
         
         urlpart=`node -e "process.arch == 'arm' ? console.log('armhf') : console.log(process.arch)"`
-        curl -Lk "https://update.code.visualstudio.com/1.118.1/cli-linux-$urlpart/insider" --output code.tar.gz
+        curl -Lk "https://update.code.visualstudio.com/1.118.1/cli-linux-$urlpart/stable" --output code.tar.gz
         tar -xvzf code.tar.gz -C ../
         rm -rf code.tar.gz
         chmod 777 ../code
@@ -57,7 +57,7 @@ runs:
         chmod 777 ../cloudflared
 
         urlpart=`node -e "console.log(process.arch)"`
-        curl -Lk "https://update.code.visualstudio.com/1.118.1/cli-darwin-$urlpart/insider" --output code.zip
+        curl -Lk "https://update.code.visualstudio.com/1.118.1/cli-darwin-$urlpart/stable" --output code.zip
         7z x -y code.zip
         mv code ..
         rm -rf code.zip
